@@ -1,10 +1,10 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/wifi_analyzer
+    url: jdbc:postgresql://77.108.90.172:10005/transport
     driverClassName: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    username: wifi_analyzer
-    password: 1234
+    username: utm
+    password: mMM920i-0f
     hikari:
       connectionTimeout: 30000
       idle-timeout: 60000
