@@ -3,12 +3,11 @@ package utm.transport.app.entity.location;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.postgis.Geometry;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.LineString;
 import utm.transport.app.core.entity.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -22,4 +21,6 @@ public class PathStops extends BaseEntity {
     private String stopId;
     @Column(name = "path_geometry")
     private Geometry geometry;
+    @Column(name = "path_geometry_json")
+    private LineString stop;
 }
