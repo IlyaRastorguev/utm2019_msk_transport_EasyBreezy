@@ -3,7 +3,8 @@ package utm.transport.app.entity.location;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.postgis.Geometry;
+import org.locationtech.jts.geom.Geometry;
+import org.postgis.ComposedGeom;
 import utm.transport.app.core.entity.BaseEntity;
 
 import javax.persistence.Column;
@@ -21,5 +22,5 @@ public class RoutePath extends BaseEntity {
     private String routePath;
 
     @Column(name = "path_geometry")
-    private String geometry;
+    private Geometry geometry;
 }

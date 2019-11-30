@@ -177,6 +177,14 @@
             <version>${jaxb.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>5.4.9.Final</version>
+        </dependency>
+
+
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
