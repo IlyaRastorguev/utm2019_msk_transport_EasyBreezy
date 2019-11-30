@@ -2,8 +2,11 @@ package utm.transport.app.service.location;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import utm.transport.app.cache.CacheManager;
 import utm.transport.app.entity.location.PathStops;
 import utm.transport.app.entity.location.RoutePath;
+import utm.transport.app.exceptions.MessageRecieveException;
+import utm.transport.app.listener.MessageListenerModule;
 import utm.transport.app.repository.location.PathStopsRepository;
 import utm.transport.app.repository.location.RoutePathRepository;
 import utm.transport.app.repository.location.RouteRepository;
@@ -17,6 +20,7 @@ public class VehicleServiceImpl implements VehicleService {
     private final RoutePathRepository routePathRepository;
     private final RouteRepository routeRepository;
     private final StopsRepository stopsRepository;
+    private static MessageListenerModule messageListenerModule;
 
     public VehicleServiceImpl (PathStopsRepository pathStopsRepository, RoutePathRepository routePathRepository, RouteRepository routeRepository, StopsRepository stopsRepository) {
         this.pathStopsRepository = pathStopsRepository;
@@ -35,5 +39,27 @@ public class VehicleServiceImpl implements VehicleService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Optional<List<PathStops>> getRoutePathStops(String id) {
         return pathStopsRepository.findAllPathStops(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public void getStarted(String uid) throws MessageRecieveException {
+        if (messageListenerModule == null)
+            messageListenerModule = MessageListenerModule.init();
+
+        messageListenerModule.receiveMessages(uid);
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public void abort(String uid) {
+        messageListenerModule.abort(uid);
+        messageListenerModule = null;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public String get(String uid) {
+        return CacheManager.get(uid);
     }
 }
