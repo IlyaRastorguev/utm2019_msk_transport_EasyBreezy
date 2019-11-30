@@ -16,7 +16,7 @@ spring:
         register-once: false
   liquibase:
     change-log: classpath:liquibase/changelog-master.xml
-    enabled: true
+    enabled: false
 
 logging:
   level:

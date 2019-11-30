@@ -13,7 +13,7 @@ public class RoutePathDto {
 
     private String id;
     private String routeId;
-    private Geometry geometry;
+    private String geometry;
 
     public static RoutePathDto fromEntity(RoutePath routePath) {
         RoutePathDto dto = new RoutePathDto();

@@ -21,5 +21,5 @@ public class RoutePath extends BaseEntity {
     private String routePath;
 
     @Column(name = "path_geometry")
-    private Geometry geometry;
+    private String geometry;
 }
